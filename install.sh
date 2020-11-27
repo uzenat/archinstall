@@ -56,3 +56,23 @@ rankmirrors -n 1 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 #-----------------------------------
 
 pacstrap /mnt base linux linux-firmware
+
+
+
+# Configuration du system :
+#--------------------------
+
+# générer le fstab
+genfstab -U -p /mnt >> /mnt/etc/fstab
+
+# Chrooter dans le nouveau system
+arch-chroot /mnt
+
+# Renseigner le nom de la machine dans /etc/hostname & /etc/hosts
+echo p4nd3m1k > /etc/hostname
+echo '127.0.1.1 p4nd3m1k.localdomain p4nd3m1k' >> /etc/hosts
+
+# Choix du fuseau horaire
+ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
+
