@@ -37,7 +37,7 @@ mkdir /mnt/home && mount /dev/sda4 /mnt/home
 swapon /dev/sda2
 
 # Partition boot
-mkdir /mnt/boot && mount /dev/mnt/boot
+mkdir /mnt/boot && mount /dev/sda3 /mnt/boot
 
 
 
