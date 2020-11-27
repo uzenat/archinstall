@@ -2,6 +2,12 @@
 
 
 
+# Set variables :
+#----------------
+
+export hostname='p4nd3m1k'
+
+
 # Formatage des partitions :
 #---------------------------
 
@@ -69,8 +75,8 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 
 # Renseigner le nom de la machine dans /etc/hostname & /etc/hosts
-echo p4nd3m1k > /etc/hostname
-echo '127.0.1.1 p4nd3m1k.localdomain p4nd3m1k' >> /etc/hosts
+echo $hostname > /etc/hostname
+echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 
 # Choix du fuseau horaire
 ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
