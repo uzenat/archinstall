@@ -40,3 +40,12 @@ mkdir /mnt/boot && mount /dev/mnt/boot
 
 # Installation de pacman-contrib
 yes | pacman -S pacman-contrib
+
+# Création d'un fichier de backup des mirroirs
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+
+# Decommenter tout les mirroirs du backup
+sed -s 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+
+# Choisir le meilleur mirroir
+rankmirrors -n 1 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
