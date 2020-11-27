@@ -68,6 +68,11 @@ pacstrap /mnt base linux linux-firmware
 # Configuration du system :
 #--------------------------
 
+# printer
+echo "######################################"
+echo "#       CONFIGURATION DU SYSTEME     #"
+echo "######################################"
+
 # générer le fstab
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
@@ -82,8 +87,23 @@ echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
 # Decommenter notre local dans /etc/locale.gen
-sed -s 's/^#br_FR.UTF-8/br_FR.UTF-8/' /etc/locale.gen > /etc/locale.gen
+cp /etc/locale.gen /etc/locale.gen.backup
+sed -s 's/^#fr_FR.UTF-8/fr_FR.UTF-8/' /etc/locale.gen.backup > /etc/locale.gen
 
 # Run local-gen
-local-gen
+locale-gen
+
+# Ajoutez le nom de la locale au fichier /etc/locale.conf
+echo LANG="fr_FR.UTF-8" > /etc/locale.conf
+
+# Spécifier la locale pour la session courante
+export LANG=fr_FR.UTF-8
+
+# Éditez le fichier /etc/vconsole.conf afin d'y spécifier la disposition de clavier
+echo KEYMAP=fr > /etc/vconsole.conf
+
+# Configurez /etc/mkinitcpio.conf et créez les RAMdisks initiaux
+mkinitcpio -p linux
+
+
 
