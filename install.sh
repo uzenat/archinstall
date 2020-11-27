@@ -81,4 +81,9 @@ echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 # Choix du fuseau horaire
 ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
+# Decommenter notre local dans /etc/locale.gen
+sed -s 's/^#br_FR.UTF-8/br_FR.UTF-8/' /etc/locale.gen > /etc/locale.gen
+
+# Run local-gen
+local-gen
 
