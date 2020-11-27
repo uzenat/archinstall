@@ -77,30 +77,30 @@ echo "######################################"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
 # Chrooter dans le nouveau system
-arch-chroot /mnt
+#arch-chroot /mnt
 
 # Renseigner le nom de la machine dans /etc/hostname & /etc/hosts
-echo $hostname > /etc/hostname
-echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
+echo $hostname > /mnt/etc/hostname
+echo "127.0.1.1 $hostname.localdomain $hostname" >> /mnt/etc/hosts
 
 # Choix du fuseau horaire
-ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+ln -sf /mnt/usr/share/zoneinfo/Europe/Paris /mnt/etc/localtime
 
 # Decommenter notre local dans /etc/locale.gen
-cp /etc/locale.gen /etc/locale.gen.backup
-sed -s 's/^#fr_FR.UTF-8/fr_FR.UTF-8/' /etc/locale.gen.backup > /etc/locale.gen
+cp /mnt/etc/locale.gen /mnt/etc/locale.gen.backup
+sed -s 's/^#fr_FR.UTF-8/fr_FR.UTF-8/' /mnt/etc/locale.gen.backup > /mnt/etc/locale.gen
 
 # Run local-gen
 locale-gen
 
 # Ajoutez le nom de la locale au fichier /etc/locale.conf
-echo LANG="fr_FR.UTF-8" > /etc/locale.conf
+echo LANG="fr_FR.UTF-8" > /mnt/etc/locale.conf
 
 # Spécifier la locale pour la session courante
 export LANG=fr_FR.UTF-8
 
 # Éditez le fichier /etc/vconsole.conf afin d'y spécifier la disposition de clavier
-echo KEYMAP=fr > /etc/vconsole.conf
+echo KEYMAP=fr > /mnt/etc/vconsole.conf
 
 # Configurez /etc/mkinitcpio.conf et créez les RAMdisks initiaux
 mkinitcpio -p linux
