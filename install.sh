@@ -49,3 +49,10 @@ sed -s 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
 
 # Choisir le meilleur mirroir
 rankmirrors -n 1 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+
+
+
+# Installation des paquets de base :
+#-----------------------------------
+
+pacstrap /mnt base linux linux-firmware
