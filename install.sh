@@ -51,7 +51,7 @@ yes | pacman -S pacman-contrib
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 
 # Decommenter tout les mirroirs du backup
-sed -s 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+sed -s 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 
 # Choisir le meilleur mirroir
 rankmirrors -n 1 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
