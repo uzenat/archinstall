@@ -5,7 +5,24 @@
 # Set variables :
 #----------------
 
+# Hostname
 export hostname='p4nd3m1k'
+
+# Partitions size
+export boot_size="+300M"
+export swap_size="+500M"
+export root_size="+3G"
+export home_size="" # let empty because rest of size
+
+
+# Creation des partitions :
+#--------------------------
+
+(echo n; echo p; echo 1; echo ""; echo $boot_size; echo w) | fdisk /dev/sda
+(echo n; echo p; echo 2; echo ""; echo $swap_size; echo w) | fdisk /dev/sda
+(echo n; echo p; echo 3; echo ""; echo $root_size; echo w) | fdisk /dev/sda
+(echo n; echo p; echo 4; echo ""; echo $home_size; echo w) | fdisk /dev/sda
+
 
 
 # Formatage des partitions :
