@@ -12,18 +12,16 @@ export hostname='p4nd3m1k'
 export boot_size="+300M"
 export swap_size="+500M"
 export root_size="+3G"
-export home_size="" # let empty because rest of size
-
 
 # Creation des partitions :
 #--------------------------
 
 echo -n "- Create partitions... "
 
-echo "n\np\n1\n\n+$boot_size\nw" | fdisk /dev/sda > /dev/null
-echo "n\np\n2\n\n+$boot_size\nw" | fdisk /dev/sda > /dev/null
-echo "n\np\n3\n\n+$boot_size\nw" | fdisk /dev/sda > /dev/null
-echo "n\np\n4\n\n+$boot_size\nw" | fdisk /dev/sda > /dev/null
+echo "n\np\n1\n\n$boot_size\nw" | fdisk /dev/sda > /dev/null
+echo "n\np\n2\n\n$swap_size\nw" | fdisk /dev/sda > /dev/null
+echo "n\np\n3\n\n$root_size\nw" | fdisk /dev/sda > /dev/null
+echo "n\np\n4\n\n\nw"           | fdisk /dev/sda > /dev/null
 
 echo "[OK]"
 
