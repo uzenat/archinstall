@@ -19,10 +19,10 @@ export root_size="+3G"
 
 echo -n "- Create partitions... "
 
-(echo n; echo p; 1; echo ''; echo $boot_size; echo w) | fdisk /dev/sda > /dev/null
-(echo n; echo p; 2; echo ''; echo $swap_size; echo w) | fdisk /dev/sda > /dev/null
-(echo n; echo p; 3; echo ''; echo $root_size; echo w) | fdisk /dev/sda > /dev/null
-(echo n; echo p; 4; echo ''; echo ''; echo w)         | fdisk /dev/sda > /dev/null
+(echo n; echo p; echo 1; echo ''; echo $boot_size; echo w) | fdisk /dev/sda > /dev/null
+(echo n; echo p; echo 2; echo ''; echo $swap_size; echo w) | fdisk /dev/sda > /dev/null
+(echo n; echo p; echo 3; echo ''; echo $root_size; echo w) | fdisk /dev/sda > /dev/null
+(echo n; echo p; echo 4; echo ''; echo ''        ; echo w) | fdisk /dev/sda > /dev/null
 
 echo "[OK]"
 
