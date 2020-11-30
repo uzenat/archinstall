@@ -32,7 +32,7 @@ echo -n "  > Create Root partition (/)......."
 echo "[OK]"
 
 echo -n "  > Create Home partition (/home)..."
-(echo n; echo p; echo 4; echo ''; echo ''        ; echo w) | fdisk /dev/sda > /dev/null
+(echo n; echo p; echo ''; echo ''        ; echo w) | fdisk /dev/sda > /dev/null
 echo "[OK]"
 
 
