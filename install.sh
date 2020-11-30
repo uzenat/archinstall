@@ -13,15 +13,16 @@ export boot_size="+300M"
 export swap_size="+500M"
 export root_size="+3G"
 
+
 # Creation des partitions :
 #--------------------------
 
 echo -n "- Create partitions... "
 
-echo "n\np\n1\n\n$boot_size\nw" | fdisk /dev/sda > /dev/null
-echo "n\np\n2\n\n$swap_size\nw" | fdisk /dev/sda > /dev/null
-echo "n\np\n3\n\n$root_size\nw" | fdisk /dev/sda > /dev/null
-echo "n\np\n4\n\n\nw"           | fdisk /dev/sda > /dev/null
+(echo n; echo p; 1; echo ''; echo $boot_size; echo w) | fdisk /dev/sda > /dev/null
+(echo n; echo p; 2; echo ''; echo $swap_size; echo w) | fdisk /dev/sda > /dev/null
+(echo n; echo p; 3; echo ''; echo $root_size; echo w) | fdisk /dev/sda > /dev/null
+(echo n; echo p; 4; echo ''; echo ''; echo w)         | fdisk /dev/sda > /dev/null
 
 echo "[OK]"
 
