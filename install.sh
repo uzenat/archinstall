@@ -18,11 +18,14 @@ export home_size="" # let empty because rest of size
 # Creation des partitions :
 #--------------------------
 
+echo "- Create partitions... "
+
 (echo n; echo p; echo 1; echo ""; echo $boot_size; echo w) | fdisk /dev/sda
 (echo n; echo p; echo 2; echo ""; echo $swap_size; echo w) | fdisk /dev/sda
 (echo n; echo p; echo 3; echo ""; echo $root_size; echo w) | fdisk /dev/sda
 (echo n; echo p; echo 4; echo ""; echo $home_size; echo w) | fdisk /dev/sda
 
+echo "[OK]"
 
 
 # Formatage des partitions :
@@ -34,35 +37,43 @@ export home_size="" # let empty because rest of size
 # /def/sda3 /
 # /dev/sda4 /home
 
-mkfs.ext2 /dev/sda1
-mkfs.ext4 /dev/sda3
-mkfs.ext4 /dev/sda4
-mkswap /dev/sda2
+echo "- Format partitions... "
+mkfs.ext2 /dev/sda1 > /dev/null
+mkfs.ext4 /dev/sda3 > /dev/null
+mkfs.ext4 /dev/sda4 > /dev/null
+mkswap /dev/sda2    > /dev/null
 
+echo "[OK]"
 
 
 # Montage des partitions :
 #-------------------------
 
+echo "Create reo & mount partitions... "
+
 # Partition systeme
-mount /dev/sda3 /mnt
+mount /dev/sda3 /mnt > /dev/null
 
 # Partition utilisateur
-mkdir /mnt/home && mount /dev/sda4 /mnt/home
+mkdir /mnt/home && mount /dev/sda4 /mnt/home > /dev/null
 
 # Swap
-swapon /dev/sda2
+swapon /dev/sda2 > /dev/null
 
 # Partition boot
-mkdir /mnt/boot && mount /dev/sda1 /mnt/boot
+mkdir /mnt/boot && mount /dev/sda1 /mnt/boot > /dev/null
+
+echo "[OK]"
 
 
 
 # Selection du mirror :
 #----------------------
 
+echo "- Select best mirror... "
+
 # Installation de pacman-contrib
-yes | pacman -S pacman-contrib
+yes | pacman -S pacman-contrib > /dev/null
 
 # Création d'un fichier de backup des mirroirs
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
@@ -73,13 +84,18 @@ sed -s 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirr
 # Choisir le meilleur mirroir
 rankmirrors -n 1 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 
+echo "[OK]"
+
 
 
 # Installation des paquets de base :
 #-----------------------------------
 
-pacstrap /mnt base linux linux-firmware
+echo "- Install base package... "
 
+pacstrap /mnt base linux linux-firmware > /dev/null
+
+echo "[OK]"
 
 
 # Configuration du system :
