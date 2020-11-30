@@ -48,10 +48,10 @@ echo "[OK]"
 
 echo -n "- Format partitions... "
 
-mkfs.ext2 /dev/sda1 > /dev/null
-mkfs.ext4 /dev/sda3 > /dev/null
-mkfs.ext4 /dev/sda4 > /dev/null
-mkswap /dev/sda2    > /dev/null
+mkfs.ext2 /dev/sda1 > /dev/null 2> /dev/null
+mkfs.ext4 /dev/sda3 > /dev/null 2> /dev/null
+mkfs.ext4 /dev/sda4 > /dev/null 2> /dev/null
+mkswap /dev/sda2    > /dev/null 2> /dev/null
 
 echo "[OK]"
 
