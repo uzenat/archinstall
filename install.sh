@@ -18,12 +18,12 @@ export home_size="" # let empty because rest of size
 # Creation des partitions :
 #--------------------------
 
-echo "- Create partitions... "
+echo -n "- Create partitions... "
 
-(echo n; echo p; echo 1; echo ""; echo $boot_size; echo w) | fdisk /dev/sda
-(echo n; echo p; echo 2; echo ""; echo $swap_size; echo w) | fdisk /dev/sda
-(echo n; echo p; echo 3; echo ""; echo $root_size; echo w) | fdisk /dev/sda
-(echo n; echo p; echo 4; echo ""; echo $home_size; echo w) | fdisk /dev/sda
+echo "n\np\n1\n\n+$boot_size\nw" | fdisk /dev/sda > /dev/null
+echo "n\np\n2\n\n+$boot_size\nw" | fdisk /dev/sda > /dev/null
+echo "n\np\n3\n\n+$boot_size\nw" | fdisk /dev/sda > /dev/null
+echo "n\np\n4\n\n+$boot_size\nw" | fdisk /dev/sda > /dev/null
 
 echo "[OK]"
 
@@ -37,7 +37,8 @@ echo "[OK]"
 # /def/sda3 /
 # /dev/sda4 /home
 
-echo "- Format partitions... "
+echo -n "- Format partitions... "
+
 mkfs.ext2 /dev/sda1 > /dev/null
 mkfs.ext4 /dev/sda3 > /dev/null
 mkfs.ext4 /dev/sda4 > /dev/null
@@ -49,7 +50,7 @@ echo "[OK]"
 # Montage des partitions :
 #-------------------------
 
-echo "Create reo & mount partitions... "
+echo -n "Create reo & mount partitions... "
 
 # Partition systeme
 mount /dev/sda3 /mnt > /dev/null
@@ -70,7 +71,7 @@ echo "[OK]"
 # Selection du mirror :
 #----------------------
 
-echo "- Select best mirror... "
+echo -n "- Select best mirror... "
 
 # Installation de pacman-contrib
 yes | pacman -S pacman-contrib > /dev/null
@@ -91,7 +92,7 @@ echo "[OK]"
 # Installation des paquets de base :
 #-----------------------------------
 
-echo "- Install base package... "
+echo -n "- Install base package... "
 
 pacstrap /mnt base linux linux-firmware > /dev/null
 
