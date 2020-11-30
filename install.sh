@@ -17,14 +17,24 @@ export root_size="+3G"
 # Creation des partitions :
 #--------------------------
 
-echo -n "- Create partitions... "
+echo "- Create partitions :"
 
+echo -n "  > Create boot partition (/boot)..."
 (echo n; echo p; echo 1; echo ''; echo $boot_size; echo w) | fdisk /dev/sda > /dev/null
-(echo n; echo p; echo 2; echo ''; echo $swap_size; echo w) | fdisk /dev/sda > /dev/null
-(echo n; echo p; echo 3; echo ''; echo $root_size; echo w) | fdisk /dev/sda > /dev/null
-(echo n; echo p; echo 4; echo ''; echo ''        ; echo w) | fdisk /dev/sda > /dev/null
-
 echo "[OK]"
+
+echo -n "  > Create Swap partition..........."
+(echo n; echo p; echo 2; echo ''; echo $swap_size; echo w) | fdisk /dev/sda > /dev/null
+echo "[OK]"
+
+echo -n "  > Create Root partition (/)......."
+(echo n; echo p; echo 3; echo ''; echo $root_size; echo w) | fdisk /dev/sda > /dev/null
+echo "[OK]"
+
+echo -n "  > Create Home partition (/home)..."
+(echo n; echo p; echo 4; echo ''; echo ''        ; echo w) | fdisk /dev/sda > /dev/null
+echo "[OK]"
+
 
 
 # Formatage des partitions :
