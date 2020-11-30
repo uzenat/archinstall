@@ -46,7 +46,7 @@ echo "[OK]"
 # /def/sda3 /
 # /dev/sda4 /home
 
-echo -n "- Format partitions... "
+echo -n "- Format partitions................."
 
 mkfs.ext2 /dev/sda1 > /dev/null 2> /dev/null
 mkfs.ext4 /dev/sda3 > /dev/null 2> /dev/null
@@ -59,7 +59,7 @@ echo "[OK]"
 # Montage des partitions :
 #-------------------------
 
-echo -n "Create reo & mount partitions... "
+echo -n "Create reo & mount partitions......."
 
 # Partition systeme
 mount /dev/sda3 /mnt > /dev/null
@@ -83,7 +83,7 @@ echo "[OK]"
 echo -n "- Select best mirror... "
 
 # Installation de pacman-contrib
-yes | pacman -S pacman-contrib > /dev/null
+echo y | pacman -S pacman-contrib > /dev/null
 
 # Création d'un fichier de backup des mirroirs
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
@@ -111,10 +111,7 @@ echo "[OK]"
 # Configuration du system :
 #--------------------------
 
-# printer
-echo "######################################"
-echo "#       CONFIGURATION DU SYSTEME     #"
-echo "######################################"
+echo "- System configure"
 
 # générer le fstab
 genfstab -U -p /mnt >> /mnt/etc/fstab
@@ -145,8 +142,19 @@ export LANG=fr_FR.UTF-8
 # Éditez le fichier /etc/vconsole.conf afin d'y spécifier la disposition de clavier
 echo KEYMAP=fr > /mnt/etc/vconsole.conf
 
-# Configurez /etc/mkinitcpio.conf et créez les RAMdisks initiaux
-mkinitcpio -p linux
+echo "[OK]"
+
+
+
+# Install grub :
+#---------------
+
+echo "- Install grub"
+
+echo y | pacman -S grub-bios
+
+grub-install /dev/sda
+grub-mkconfig -o /mnt/boot/grub/grub.cfg
 
 
 
