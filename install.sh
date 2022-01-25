@@ -158,3 +158,18 @@ grub-mkconfig -o /mnt/boot/grub/grub.cfg
 
 
 
+# Network :
+#----------
+
+# Install net tools
+pacman -S net-tools
+
+# Install dhcpcd
+pacman -S dhcpcd
+
+# Active
+systemctl start dhcpcd@<interface>
+systemctl enable dhcpcd@<interface>
+
+
+
