@@ -153,7 +153,7 @@ echo "- Install grub"
 
 echo y | pacman -S grub-bios
 
-grub-install /dev/sda
+grub-install --root-directory=/mnt /dev/sda
 grub-mkconfig -o /mnt/boot/grub/grub.cfg
 
 
