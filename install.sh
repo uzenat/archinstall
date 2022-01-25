@@ -173,3 +173,16 @@ systemctl enable dhcpcd@<interface>
 
 
 
+# GUI :
+#------
+
+# Installer xorg
+pacman -Syu xorg-server
+pacman -Syu xorg-xinit xorg-twm xorg-xclock xterm
+
+# Installer xmonad
+pacman -S xmonad
+
+pacman -S xorg-xinit xorg-twm xorg-xclock xterm
+
+
