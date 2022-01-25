@@ -83,7 +83,7 @@ echo "[OK]"
 echo -n "- Select best mirror... "
 
 # Installation de pacman-contrib
-echo y | pacman -S pacman-contrib > /dev/null
+echo y | pacman -Sy pacman-contrib > /dev/null
 
 # Création d'un fichier de backup des mirroirs
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
